@@ -1,12 +1,11 @@
 import requests
-Token = '45540171a527624374de26ad61945b5f6cc6b001'
+Token = '*******'
 
-url = 'https://api.nobitex.ir/users/wallets/list'
-payload = {}
+url = 'https://api.nobitex.ir/users/wallets/balance'
+payload = {'currency': 'ltc'}
 headers = {
-    'Authorization': 'Token 45540171a527624374de26ad61945b5f6cc6b001'
+    'Authorization': 'Token *******',
 }
-request = requests.request('GET', url, headers=headers, data=payload)
-
+request = requests.request('POST', url, headers=headers, data=payload)
 
 print(request.text)
