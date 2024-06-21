@@ -1,6 +1,6 @@
 import requests
 
-Token = '******'
+Token = '39d35c9930f1543c4b8537e4007ec806a0fae270'
 url = 'https://api.nobitex.ir/market/orders/add'
 
 srcCurrency = input('origin currency: ').upper()
@@ -16,10 +16,10 @@ def SellCoin():
         'type': 'buy',
         'srcCurrency': srcCurrency,
         'dstCurrency': dstCurrency,
-        'amount': float(Amount),
-        'price': float(Price),
-        'stopPrice': float(StopPrice),
-        'stopLimitPrice': float(stopLimitPrice)
+        'amount': Amount,
+        'price': Price,
+        'stopPrice': StopPrice,
+        'stopLimitPrice': stopLimitPrice
     }
     headers = {
         'Authorization': f'Token {Token}'
