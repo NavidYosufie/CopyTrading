@@ -1,6 +1,6 @@
 import requests
 
-Token = '39d35c9930f1543c4b8537e4007ec806a0fae270'
+Token = '******'
 url = 'https://api.nobitex.ir/market/orders/add'
 
 srcCurrency = input('origin currency: ')
