@@ -2,8 +2,8 @@ import requests
 
 Token = '******'
 
-srcCurrency = input('origin currency: ')
-dstCurrency = input('destination currency: ')
+srcCurrency = input('origin currency: ').upper()
+dstCurrency = input('destination currency: ').upper()
 Amount = input('enter your amount: ')
 Price = input('Choose your price to buy currency: ')
 StopPrice = input('Set your price for the stop loss: ')
