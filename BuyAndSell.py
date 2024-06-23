@@ -1,6 +1,9 @@
+import os
+from dotenv import load_dotenv, dotenv_values
 import requests
+load_dotenv()
 
-Token = '******'
+Token = f''
 url = 'https://api.nobitex.ir/market/orders/add'
 
 srcCurrency = input('origin currency: ')
