@@ -40,3 +40,9 @@ class NobitexAPI:
 
 api = NobitexAPI('https://api.nobitex.ir/', {'Authorization': 'Token ******'})
 
+balance = api.get_wallet_balance()
+print(balance)
+orders = api.get_user_order()
+print(orders)
+new_order = api.set_order()
+print(new_order)
