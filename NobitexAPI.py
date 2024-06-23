@@ -1,13 +1,4 @@
-from dotenv import load_dotenv
 import requests
-import os
-
-load_dotenv()
-
-Token = {
-    'Authorization': f'Token {os.getenv("TOKEN_NobitexAPI")}',
-}
-BaseUrl = 'https://api.nobitex.ir/'
 
 
 class NobitexAPI:
@@ -29,44 +20,24 @@ class NobitexAPI:
         if response.status_code == 200:
             return response.json()
         return response.status_code
-    def get_order(self):
-        execution = input('If you want the transaction to be done at the market price, enter the word (market), otherwise, the transaction will be done at the price you specified: ')
-        srcCurrency = input('Select the source currency: ')
-        dstCurrency = input('Select the destination currency: ')
-        amount = input('enter your amount: ')
-        price = input('enter your price: ')
-        stopPrice = input('If you want to sell your currency at a certain price, enter the price, otherwise, press enter: ')
-        stopLimitPrice = input('If you want to determine the loss limit, enter the amount, otherwise press enter: ')
 
+    def set_order(self, type, execution, srcCurrency, dstCurrency, amount, price, stopPrice, stopLimitPrice):
         url = f'{self.base_url}market/orders/add'
         payload = {
-            'type': 'buy',
-            'execution': 'limit',
-            'srcCurrency': 'btc',
-            'dstCurrency': 'usdt',
+            'type': f'{type}',
+            'execution': f'{execution}',
+            'srcCurrency': f'{srcCurrency}',
+            'dstCurrency': f'{dstCurrency}',
             'amount': f'{amount}',
             'price': f'{price}',
-            'stopPrice': '',
-            'stopLimitPrice': ''
+            'stopPrice': f'{stopPrice}',
+            'stopLimitPrice': f'{stopLimitPrice}'
         }
-        if execution:
-            payload.update({'execution': execution})
-        if srcCurrency:
-            payload.update({'srcCurrency': srcCurrency})
-        if dstCurrency:
-            payload.update({'dstCurrency': dstCurrency})
-        if stopPrice:
-            payload.update({'stopPrice': stopPrice})
-        if stopLimitPrice:
-            payload.update({'stopLimitPrice': stopLimitPrice})
         response = requests.request('POST', url, headers=self.token, data=payload)
         status = response.json()
         return status
 
 
+api = NobitexAPI('https://api.nobitex.ir/', {'Authorization': 'Token ******'})
 
-api = NobitexAPI(BaseUrl, Token)
-
-print(api.get_wallet_balance())
-print(api.get_user_order())
-print(api.get_order())
+print(api.set_order('sell', 'limit', 'btc', 'usdt', '1', '64000', '67000', '63000'))
