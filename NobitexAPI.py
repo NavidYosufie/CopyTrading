@@ -31,21 +31,35 @@ class NobitexAPI:
         return response.status_code
     def get_order(self):
         execution = input('If you want the transaction to be done at the market price, enter the word (market), otherwise, the transaction will be done at the price you specified: ')
+        srcCurrency = input('Select the source currency: ')
+        dstCurrency = input('Select the destination currency: ')
+        amount = input('enter your amount: ')
+        price = input('enter your price: ')
+        stopPrice = input('If you want to sell your currency at a certain price, enter the price, otherwise, press enter: ')
+        stopLimitPrice = input('If you want to determine the loss limit, enter the amount, otherwise press enter: ')
+
         url = f'{self.base_url}market/orders/add'
         payload = {
-            'type': 'sell',
+            'type': 'buy',
             'execution': 'limit',
             'srcCurrency': 'btc',
             'dstCurrency': 'usdt',
-            'amount': '1',
-            'price': '70000',
+            'amount': f'{amount}',
+            'price': f'{price}',
             'stopPrice': '',
             'stopLimitPrice': ''
         }
         if execution:
             payload.update({'execution': execution})
+        if srcCurrency:
+            payload.update({'srcCurrency': srcCurrency})
+        if dstCurrency:
+            payload.update({'dstCurrency': dstCurrency})
+        if stopPrice:
+            payload.update({'stopPrice': stopPrice})
+        if stopLimitPrice:
+            payload.update({'stopLimitPrice': stopLimitPrice})
         response = requests.request('POST', url, headers=self.token, data=payload)
-        print(payload['execution'])
         status = response.json()
         return status
 
@@ -53,6 +67,6 @@ class NobitexAPI:
 
 api = NobitexAPI(BaseUrl, Token)
 
-# print(api.get_wallet_balance())
-# print(api.get_user_order())
+print(api.get_wallet_balance())
+print(api.get_user_order())
 print(api.get_order())
