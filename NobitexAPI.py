@@ -40,4 +40,3 @@ class NobitexAPI:
 
 api = NobitexAPI('https://api.nobitex.ir/', {'Authorization': 'Token ******'})
 
-print(api.set_order('sell', 'limit', 'btc', 'usdt', '1', '64000', '67000', '63000'))
