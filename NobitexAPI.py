@@ -24,14 +24,14 @@ class NobitexAPI:
     def set_order(self, type, execution, srcCurrency, dstCurrency, amount, price, stopPrice, stopLimitPrice):
         url = f'{self.base_url}market/orders/add'
         payload = {
-            'type': f'{type}',
-            'execution': f'{execution}',
-            'srcCurrency': f'{srcCurrency}',
-            'dstCurrency': f'{dstCurrency}',
-            'amount': f'{amount}',
-            'price': f'{price}',
-            'stopPrice': f'{stopPrice}',
-            'stopLimitPrice': f'{stopLimitPrice}'
+            'type': type,
+            'execution': execution,
+            'srcCurrency': srcCurrency,
+            'dstCurrency': dstCurrency,
+            'amount': amount,
+            'price': price,
+            'stopPrice': stopPrice,
+            'stopLimitPrice': stopLimitPrice
         }
         response = requests.request('POST', url, headers=self.token, data=payload)
         status = response.json()
